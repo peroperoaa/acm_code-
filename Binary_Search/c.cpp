@@ -9,12 +9,12 @@ int n,k;
 int check (int x)
 {
     int l=0,r=N;
-    while(l!=r-1)//二分巧克力边长
+    while(l!=r-1)
     {
         int mid=(l+r)>>1; 
         int amid=0;
         for(int i=1;i<=n;i++)
-            amid+=(cholen[i].min/mid)*(cholen[i].max/mid);//计算该边长下巧克力可被分为几块
+            amid+=(cholen[i].min/mid)*(cholen[i].max/mid);
         if(amid>=x)l=mid;
         else r=mid;
     }

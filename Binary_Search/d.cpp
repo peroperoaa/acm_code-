@@ -1,31 +1,35 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
-int a[50010];
-int L,N,M;
+const int N=1e4+10;
+int n,k;
+int a[N];
 bool check(int mid)
 {
-    int cnt=0,now=1;
-    for(int i=2;i<=N+2;i++)
-        if(a[i]-a[now]<mid)
-            cnt++;
-        else now=i;
-    if(cnt<=M)return true;
+    long long sum=0;
+    for(int i=1;i<=n;i++)
+        sum+=a[i]/mid;
+    if(sum>=k) return true;
     else return false;
 }
 int main()
 {
-    ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-    cin>>L>>N>>M;
-    a[1]=0,a[N+2]=L;//起点 终点石头
-    for(int i=2;i<=N+1;i++)
-        cin>>a[i];
-    int l=0,r=1e9;
-    while(l!=r-1)//二分最短跳跃距离
+    // ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    cin>>n>>k;
+    for(int i=1;i<=n;i++)
+    {
+        double temp;cin>>temp;
+        a[i]=(int)(temp*100);
+    }
+    int l=0,r=1e5;
+    while(l+1!=r)//二分网线长度
     {
         int mid=(l+r)>>1;
-        if(check(mid))l=mid;
-        else r=mid;
+        if(check(mid))
+            l=mid;
+        else
+            r=mid;
     }
-    cout<<l;
-    return 0;
-}//边界条件有点臭
+    if(l<1)
+        cout<<"0.00";
+    else printf("%.2f",l/100.0);
+}
