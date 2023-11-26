@@ -14,11 +14,11 @@ int main()
             x += x;
         }
         if(x.size() >= 25 && x.find(s) == -1)
-            cout << -1 << "##\n";
+            cout << -1 << "\n";
         else if(cnt == 0)
-            cout << 0 << "##\n";
+            cout << 0 << "\n";
         else
-            cout << cnt << "##\n";
+            cout << cnt << "\n";
     }
     return 0;
 }
