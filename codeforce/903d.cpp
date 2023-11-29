@@ -21,7 +21,7 @@ void solve(void)
     int flag = 1;
     for(int i = 2; i <= 1e4; i++)
     {
-        if(a[i] != n && a[i] != 0)
+        if(a[i] %n != 0  && a[i] != 0)
         {
             flag = 0;
             break;
