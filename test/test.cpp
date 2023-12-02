@@ -1,46 +1,17 @@
 #include <bits/stdc++.h>
-#define int long long
 using namespace std;
-const int N = 1e5 + 10;
-struct node{
-    int a, b;
-    bool c = false;
-}box[N];
-bool cmp1(node a, node b)
+int main()
 {
-    if(a.c == 0 && b.c == 0)
-        return a.a > b.a;
-    else if(a.c == 0 && b.c != 0)
-        return false;
-    else if(a.c != 0 && b.c == 0) 
-        return true;
-    else
-        return a.b > b.b;
-}
-bool cmp2(node a, node b)
-{
-    return a.a > b.a;
-}
-int ans;
-signed main()
-{
-    ios::sync_with_stdio(false), cin.tie(nullptr),cout.tie(nullptr);
-    int n, k;
-    cin >> n >> k;
-    for(int i = 0; i < n; i++)
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    string s, str, split;
+    cin >> s >> split >> str;
+    int pos = s.find(str);
+    while(pos != string::npos)
     {
-        int a, b;
-        cin >> a >> b;
-        box[i].c = b > a;
-        box[i].a = a;
-        box[i].b = b;
+        for(int i = pos + 1; i < pos + 2 * str.size() - 1; i += 2)
+            s.insert(i, split);
+        pos = s.find(str);
     }
-    sort(box, box + n, cmp1);
-    sort(box + k, box +n, cmp2);
-    for(int i = 0; i < k; i++)
-        ans += box[i].b;
-    for(int i = k; i < n; i++)
-        ans += box[i].a;
-    cout << ans;
-   return 0;
+    cout << s;
+    return 0;
 }
