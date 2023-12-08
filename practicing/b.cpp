@@ -4,7 +4,7 @@
 using namespace std;
 const int N = 1e3 + 10;
 int idx[N];
-double plca[N][3], plcb[N][3];
+long long plca[N][3], plcb[N][3];
 int main()
 {
     int n, k;
@@ -24,14 +24,14 @@ int main()
             cin >> plcb[q][1] >> plcb[q][2];
             q++;
         }
-        double ans = 0;
-        for(int i = 1; i <= n - k; i++)
-        {
-            double MinS = 1e6;
-            for(int j = 1; j <= k; j++)
-                MinS = min(MinS, sqrt((plca[j][1] - plcb[i][1]) * (plca[j][1] - plcb[i][1]) + (plca[j][2] - plcb[i][2]) * (plca[j][2] - plcb[i][2])));
-            ans = max(ans, MinS);
-        }
-        printf("%.10f", ans);
+    double ans = 0;
+    for(int i = 1; i <= n - k; i++)
+    {
+        double MinS = 1e6;
+        for(int j = 1; j <= k; j++)
+            MinS = min(MinS, sqrt((plca[j][1] - plcb[i][1]) * (plca[j][1] - plcb[i][1]) + (plca[j][2] - plcb[i][2]) * (plca[j][2] - plcb[i][2])));
+        ans = max(ans, MinS);
+    }
+    printf("%.10f", ans);
     return 0;
 }
