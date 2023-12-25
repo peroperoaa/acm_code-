@@ -5,6 +5,13 @@ algorithm:
     stk.top();
     stk.empty();
     stk.size();
+用数组模拟栈：
+    int stk[N];
+    top = 0;
+    push: stk[++top] = x;
+    pop: --top;
+    sise:top;
+    empty: top == 0;
 
 priority_queue<int> pq;//大根堆
 priority_queue<int, vector<int>, greater<int> > pq;//小根堆
