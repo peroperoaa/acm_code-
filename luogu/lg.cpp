@@ -14,7 +14,7 @@ signed main()
         while(top && v[i] >= v[stk[top]])
             top--;
         if(top)
-            ans[i] =stk[top] + 1;
+            ans[i] = stk[top] + 1;
         stk[++top] = i;
     }
     for(int i = 0; i < n; i++)
