@@ -1,4 +1,35 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h>#include <iostream>
+#include <set>
+#include <map>
+using namespace std;
+
+map<string,set<int>>m;
+string s;
+int main(){
+    int n;
+    cin >> n;
+    for(int i = 1;i <= n;i++){
+        int k;
+        cin >> k;
+        for(int j = 1;j <= k;j++){
+            cin >> s;
+            m[s].insert(i);
+        }
+    }
+    int mm;
+    cin >> mm;
+    string s1;
+    for(int i = 1;i <= mm;i++){
+        cin >> s1;
+        if(m[s1].empty()){
+            for(set<int>::iterator it = m[s1].begin();it != m[s1].end();it++){
+                cout << *it << ' ';
+            }
+            cout << '\n';
+        }
+    }
+    return 0;
+}
 using namespace std;
 const int N = 30;
 vector<int> v;
@@ -28,7 +59,6 @@ int main()
         cin >> temp;
         v.push_back(temp);
     }
-    v.erase(unique(v.begin(), v.end()), v.end());
     cout << dfs(0, k, 0, 0);
     return 0;
 }
