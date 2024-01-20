@@ -38,8 +38,7 @@ int main()
     for(int i = 0; i < 6; i++)
 
     // std::vector <int> b = {1, 2, 3, 4, 6};
-    // for(int i:b)
-    //     std::cout << i <       for(int j = 0; j < 6; j++)
+    for(int j = 0; j < 6; j++)
             arr[i][j] = i * j;
     std::vector<std::vector<int> > vec(&arr[0][0], &arr[5][5]);
     std::vector<std::vector<int> > vec1(c.begin(), c.end());
