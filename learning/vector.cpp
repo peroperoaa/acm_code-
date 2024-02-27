@@ -41,7 +41,7 @@ int main()
     for(int j = 0; j < 6; j++)
             arr[i][j] = i * j;
     std::vector<std::vector<int> > vec(&arr[0][0], &arr[5][5]);
-    std::vector<std::vector<int> > vec1(c.begin(), c.end());
+    std::vector<std::vector<int> > vec1(c.begin(), c.end());     
     for(int i = 0; i < vec.size(); i++)
     {
         for(int j = 0; j < vec[i].size(); j++)
