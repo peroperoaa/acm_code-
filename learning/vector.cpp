@@ -38,6 +38,7 @@ int main()
     // for(int i = 0; i < 6; i++)
 
     // std::vector <int> b = {1, 2, 3, 4, 6};
+<<<<<<< HEAD
     // for(int i:b)
     // //     std::cout << i <       for(int j = 0; j < 6; j++)
     //         arr[i][j] = i * j;
@@ -50,5 +51,18 @@ int main()
     //     std::cout << '\n';
     // }
     // 
+=======
+    for(int j = 0; j < 6; j++)
+            arr[i][j] = i * j;
+    std::vector<std::vector<int> > vec(&arr[0][0], &arr[5][5]);
+    std::vector<std::vector<int> > vec1(c.begin(), c.end());
+    for(int i = 0; i < vec.size(); i++)
+    {
+        for(int j = 0; j < vec[i].size(); j++)
+            std::cout << vec[i][j] << ' ';
+        std::cout << '\n';
+    }
+    
+>>>>>>> 97656ab53eba3d0e4baf9cdf350474c7da8a96ca
     return 0;
 }
