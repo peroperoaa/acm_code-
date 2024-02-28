@@ -34,7 +34,3 @@ int main()
     //input
     return 0;
 }
-for(auto i : a)
-{
-           
-}
