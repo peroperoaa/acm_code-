@@ -8,12 +8,7 @@ c的补充:
 string篇:
 1.string有append substr insert find length(size)
 2.s.find查找不到子串的时候返回的不是-1，应强制类型转换到int(否则会返回string::npos) （int)s.find(s)
-3.string可以直接进行比较(比较字典序)
-4.substr(pos,len); 截取从pos个位置开始len个字符
-5.insert(pos,str); 在s的第pos个字符前插入str
-6.string与char数组类型转换
-~~char arr[N];string str;
-~~string ->char数组: 
+3. vw>char数组: 
 ~~strcpy(arr,str.c_str());
 ~~char数组 ->string:
 ~~str=arr;
@@ -21,7 +16,7 @@ string篇:
 8.getline格式为:getline(cin,str); //string str;
 
 内存四区：
-代码区 (共享, 只读), 全局区 (全局const(全局常量), static (静态变量), 全局变量, 字符串常量), 堆区(), 栈区(形式参数, 局部变量)
+代码区 (共享, 只读), 全局区 (全局const(全局常量), static (静态变量), 全局变量, 字符串常量), 堆区(new, malloc), 栈区(形式参数, 局部变量)
 1.程序运行前:代码区, 全局区	程序运行后:堆区, 栈区
 2.全局区的数据在程序结束后由操作系统释放
 3.栈区数据注意事项--不要返回局部变量的地址
@@ -35,3 +30,9 @@ string篇:
 2.引用初始化之后不能再改变(指针常量)
 3.不要返回局部变量的引用(可返回生命周期长于该函数的变量的引用)
 4. 返回值为引用的函数调用可以作为左值
+
+函数篇
+1.函数表可以设置默认参数,但必须放在形参后面
+2.设置默认参数的变量以传入值为准,没有传入值才使用默认参数
+3.函数的声明和实现只能有一个有默认参数
+4.占位参数可以有默认参数
