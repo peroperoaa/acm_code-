@@ -1,28 +1,56 @@
 #include <bits/stdc++.h>
 using namespace std;
-void solve(void)
+
+class Cube
 {
-    double n; cin >> n;
-    if(n >= 85) cout << 'A' << endl;
-    else if(n >= 75) cout << 'B' << endl;
-    else if(n >= 65) cout << 'C' << endl;
-    else if(n >= 60) cout << 'D' << endl;
-    else cout << 'F' << endl;
-}
+public:
+    void set_l(int l)
+    {
+        m_l = l;
+    }
+    void set_h(int h)
+    {
+        m_h = h;
+    }
+    void set_w(int w)
+    {
+        m_w = w;
+    }
+    int get_l(void)
+    {
+        return m_l;
+    }
+    int get_h(void)
+    {
+        return m_h;
+    }
+    int get_w(void)
+    {
+        return m_w;
+    }
+    int caculateS(void)
+    {
+        return 2 * m_h * m_l + 2 * m_h * m_w + 2 * m_l * m_w;
+    }
+    int caculateV(void)
+    {
+        return m_h * m_l * m_w;
+    }
+private:
+    int m_l;
+    int m_h;
+    int m_w;
+};
 int main()
 {
-    int t = 1;
-    cin >> t;
-    while(t--)
-        solve();
+    Cube c1, c2;
+    c1.set_l(10);
+    c1.set_h(10);
+    c1.set_w(10);
+    cout << "c1的面积是:" << c1.caculateS() << endl;
+    cout << "c1的体积是:" << c1.caculateV() << endl;
+    c2.set_l(10);
+    c2.set_h(10);
+    c2.set_w(10);
     return 0;
-}
-int * rtr(void)
-{
-    int * p = new int [10];
-
-    //
-
-    
-    return p;
 }
