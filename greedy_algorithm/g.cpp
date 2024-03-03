@@ -16,6 +16,7 @@ int main()
     for(int i=0;i<n;i++)
         cin>>a[i].value>>a[i].vl;
     sort(a,a+n,cmp);
+    cout << N;
     int p=0;
     while(w>0&&p<n)
     {

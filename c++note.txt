@@ -1,0 +1,37 @@
+c的补充:
+1.cout输出char类型。默认输出字符
+2.pow括号内幂为浮点数（不能为1/3）
+
+零散篇：
+1.sort的cmp函数在遵循先a后b条件下retuan时a与b中间符号即为排序方式(即a<b成立时返回true 而 true不排 最终排序结果则为a<b)
+
+string篇:
+1.string有append substr insert find length(size)
+2.s.find查找不到子串的时候返回的不是-1，应强制类型转换到int(否则会返回string::npos) （int)s.find(s)
+3.string可以直接进行比较(比较字典序)
+4.substr(pos,len); 截取从pos个位置开始len个字符
+5.insert(pos,str); 在s的第pos个字符前插入str
+6.string与char数组类型转换
+~~char arr[N];string str;
+~~string ->char数组: 
+~~strcpy(arr,str.c_str());
+~~char数组 ->string:
+~~str=arr;
+7.fgets格式为: fgets(str,sizeof(str),stdin); //char str[N];
+8.getline格式为:getline(cin,str); //string str;
+
+内存四区：
+代码区 (共享, 只读), 全局区 (全局const(全局常量), static (静态变量), 全局变量, 字符串常量), 堆区(), 栈区(形式参数, 局部变量)
+1.程序运行前:代码区, 全局区	程序运行后:堆区, 栈区
+2.全局区的数据在程序结束后由操作系统释放
+3.栈区数据注意事项--不要返回局部变量的地址
+4.战区数据由编译器管理开辟和释放
+5.堆区由程序员分配释放(new, malloc), 若不释放, 程序结束时由操作系统释放
+6. int *p = new int(10);	delete p;	
+7.int * arr = new int [10]; delete [] arr;
+
+引用篇:
+1.引用定义时必须要初始化
+2.引用初始化之后不能再改变(指针常量)
+3.不要返回局部变量的引用(可返回生命周期长于该函数的变量的引用)
+4. 返回值为引用的函数调用可以作为左值

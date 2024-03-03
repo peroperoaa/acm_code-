@@ -1,26 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e3 + 10;
+void solve(void)
+{
+    double n; cin >> n;
+    if(n >= 85) cout << 'A' << endl;
+    else if(n >= 75) cout << 'B' << endl;
+    else if(n >= 65) cout << 'C' << endl;
+    else if(n >= 60) cout << 'D' << endl;
+    else cout << 'F' << endl;
+}
 int main()
 {
-    int n; 
-    while(cin >> n && n != 0)
-    {
-        int p = 0;
-        map<string, int> mp;
-        vector<int> g[N];
-        for(int i = 0; i < n; i++)
-        {
-            string w, l; cin >> w >> l;
-            if(!mp.count(w)) mp[w] = p++;
-            if(!mp.count(l)) mp[l] = p++;
-             g[mp[l]].push_back(mp[w]);
-        }
-        int cnt = 0;
-        for(int i = 0; i < p; i++)
-            if(g[i].size() == 0) cnt++;
-        if(cnt == 1) cout << "Yes\n";
-        else cout << "No\n";
-    }
+    int t = 1;
+    cin >> t;
+    while(t--)
+        solve();
     return 0;
+}
+int * rtr(void)
+{
+    int * p = new int [10];
+
+    //
+
+    
+    return p;
 }
