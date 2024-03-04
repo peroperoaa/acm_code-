@@ -1,5 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
+int main()
+{
+    int a = 10;
+    int 
+=======
 
 class Cube
 {
@@ -52,5 +58,6 @@ int main()
     c2.set_l(10);
     c2.set_h(10);
     c2.set_w(10);
+>>>>>>> 8ae01895a619af40f8fd044d64746407c716f89b
     return 0;
 }
