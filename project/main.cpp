@@ -21,12 +21,16 @@ public:
     {
         return mName;
     }
+    Person(string s)
+    {
+        cout << "lxh是sb" << endl;
+    }
 private:
     string mName;
 };
 void create(void)
 {
-    Person p;
+    Person p("sblxh");
 }
 void isIn(Circle c, Point p)
 {

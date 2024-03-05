@@ -2,7 +2,7 @@
 using namespace std;
 const int N = 1e4 + 10;
 int pre[N], n, m, op, a, b;
-int root(int u){return pre[u] = (pre[u] == u? u: root(pre[u]));}
+int root(int u){return pre[u] = (pre[u] == u ? u : root(pre[u]));}
 void merge(int u, int v){pre[root(u)] = root(v);}
 bool isCon(int u, int v){return root(u) == root(v);}
 void solve(void)
