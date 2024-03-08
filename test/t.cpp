@@ -1,52 +1,31 @@
 #include <bits/stdc++.h>
+#define int long long 
 using namespace std;
-const int N = 5e2 + 10;
-struct node {
-    int id;
-    int r;
-};
-bool cmp(node a, node b)
+const int N = 10;
+struct node{
+    int x, y, v;
+}r[N * N];
+int pre[N];
+int root (int u) {return pre[u] = (pre[u] == u ? u : root(pre[u]));}
+void merge (int u, int v) {pre[root(u)] = root(v);}
+bool isCon (int u, int v) {return root(u) == root(v);}
+bool cmp (node a, node b) {return a.v < b.v;}
+signed main()
 {
-    if(a.r != b.r)
-        return a.r < b.r;
-    else a.id < b.id;
-}
-vector<node> ans;
-vector<int> g[N];
-int n, m, in[N];
-void toposort(void)
-{
-    queue<node> q;
-    for(int i = 1; i <= n; i++)
-        if(in[i] == 0)
-        {
-            q.push({i, 0}), ans.push_back({i, 0});
-            break;
-        }
-    while(q.size())
-    {
-        node temp = q.front();
-        q.pop();
-        for(int i : g[temp.id])
-            if(--in[i] == 0)
-            {
-                q.push({i, temp.r + 1}), ans.push_back({i, temp.r + 1});
-                break;
-            }
-    }
-}
-int main()
-{
-    cin >> n >> m;
+    for(int i = 0; i < N; i++) pre[i] = i;
+    int n, m, k; cin >> n >> m >> k;
+    for(int i = 0; i < m; i++)
+        cin >> r[i].x >> r[i].y >> r[i].v;
+    sort(r, r + m, cmp);    
+    long long ans = 0;
     for(int i = 0; i < m; i++)
     {
-        int f, l; cin >> f >> l;
-        g[f].push_back(l);
-        in[l]++;
+        if(!isCon(r[i].x, r[i].y))
+        {
+            // cout << r[i].x << ' ' << r[i].y << ' ' << r[i].v << endl; 
+            merge(r[i].x, r[i].y);
+            ans = (ans + r[i].v) % k;
+        }
     }
-    toposort();
-    sort(ans.begin(), ans.end(), cmp);
-    for(node a : ans)
-        cout << a.id << ' ';
-    return 0;
+    cout << ans << endl;
 }
