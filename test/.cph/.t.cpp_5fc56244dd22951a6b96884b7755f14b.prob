@@ -1,0 +1,1 @@
+{"name":"Local: t","url":"d:\\vsc c++ code\\acm_code-\\test\\t.cpp","tests":[{"id":1711786942137,"input":"8\n7 7 7 7 7 7 7 7","output":""},{"id":1711787226320,"input":"5\n2 6 4 10 20","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\vsc c++ code\\acm_code-\\test\\t.cpp","group":"local","local":true}
