@@ -1,6 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
 int a[10], b[10];
+=======
+<<<<<<< HEAD
+
+void solve(void)
+{
+    int n; cin >> n;
+    vector<int> v;
+    for(int i = 0; i < n; i++)
+    {
+        int temp; cin >> temp;
+        v.push_back(temp);
+    }
+    sort(v.begin(), v.end());
+    int  mn = LONG_LONG_MAX;
+    for(int i = 0; i < n - 1; i++)
+        mn = min(mn, v[i + 1] - v[i]);
+    // cout << mn;
+    if(mn == 0)
+    cout << n << endl;
+    else
+    cout << (v[n - 1] - v[0]) / mn + 1;
+}
+signed main()
+{
+    int t = 1; 
+    // cin >> t;
+    while(t--) solve();   
+    return 0;
+=======
+>>>>>>> 591dd2cd6ce195afc041c5d9cc55f1eeab842777
 const int N = 10;
 bool vis[N][N];
 int n, h, w;
@@ -70,8 +101,28 @@ void solve(void)
 }
 signed main()
 {
+<<<<<<< HEAD
     int _ = 1;
     // cin >> _;
     while(_--) solve();
     return 0;
+=======
+    for(int i = 0; i < N; i++) pre[i] = i;
+    int n, m, k; cin >> n >> m >> k;
+    for(int i = 0; i < m; i++)
+        cin >> r[i].x >> r[i].y >> r[i].v;
+    sort(r, r + m, cmp);    
+    long long ans = 0;
+    for(int i = 0; i < m; i++)
+    {
+        if(!isCon(r[i].x, r[i].y))
+        {
+            // cout << r[i].x << ' ' << r[i].y << ' ' << r[i].v << endl; 
+            merge(r[i].x, r[i].y);
+            ans = (ans + r[i].v) % k;
+        }
+    }
+    cout << ans << endl;
+>>>>>>> 8465cf40c4db3ab2ad7eea65366606de61e1022f
+>>>>>>> 591dd2cd6ce195afc041c5d9cc55f1eeab842777
 }
