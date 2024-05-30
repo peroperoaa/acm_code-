@@ -40,6 +40,7 @@ int main()
     {
         int u, v, w; cin >> u >> v >> w;
         g[u].push_back({v, w});
+        g[v].push_back({u, w});
     }
     dijkstra(s);
     for(int i = 1; i <= n; i++)

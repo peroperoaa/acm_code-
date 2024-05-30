@@ -1,0 +1,1 @@
+{"name":"Local: c","url":"d:\\program files (x86)\\vsc c++ code\\acm_code-\\test\\temp_hw\\c.cpp","tests":[{"id":1716364676250,"input":"-4 1 0 10 5 \n-11 8 10 17 -6","output":"-15 9 10 27 -1 \n7 -7 -10 -7 11"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\program files (x86)\\vsc c++ code\\acm_code-\\test\\temp_hw\\c.cpp","group":"local","local":true}

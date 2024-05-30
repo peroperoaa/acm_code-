@@ -1,114 +1,78 @@
-#include <iostream>
-#include <iomanip>
+#include <bits/stdc++.h>
 using namespace std;
-class Date
+// 定义Fraction类
+class Fraction
 {
-    int year, month, day;
-    int md[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    int rmd[13] = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+private:
+    int fz, fm;
+    int commonDivisor() 
+    {
+        return 0;
+    } // 计算最大公约数
+    void contracted() { } // 分数化简
 public:
-    Date();
-    Date(int y, int m, int d);
-    int getYear();
-    int getMonth();
-    int getDay();
-    void setDate(int y, int m, int d);
-    void print();
-    void addOneDay();
-    bool isR();
+    Fraction(int a = 0, int b = 1);
+    Fraction(const Fraction& p);
+    Fraction operator+(Fraction p);
+    Fraction operator-(Fraction p);
+    Fraction operator*(Fraction p);
+    Fraction operator/(Fraction p);
+    void set(int = 0, int = 1);
+    void display();
 };
-Date::Date()
+Fraction::Fraction(int a, int b)
 {
-    year = 1900, month = 1, day = 1;
+    fz = a, fm = b;
 }
-Date::Date(int y, int m, int d)
+Fraction::Fraction(const Fraction& p)
 {
-    year = y, month = m, day = d;
+    fz = p.fz;
+    fm = p.fm;
 }
-int Date::getYear()
+Fraction Fraction::operator+(Fraction p)
 {
-    return year;
+    Fraction tmp;
+    tmp.fm = fm * p.fm;
+    tmp.fz = fz * p.fm + p.fz * fm;
+    return tmp;
 }
-int Date::getMonth()
+Fraction Fraction::operator-(Fraction p)
 {
-    return month;
+    Fraction tmp;
+    tmp.fm = fm * p.fm;
+    tmp.fz = fz * p.fm - p.fz * fm;
+    return tmp;
 }
-int Date::getDay()
+Fraction Fraction::operator*(Fraction p)
 {
-    return day;
+    Fraction tmp;
+    tmp.fz = this->fz * p.fz;
+    tmp.fm = this->fm * p.fm;
+    return tmp;
 }
-void Date::setDate(int y, int m, int d)
+Fraction Fraction::operator/(Fraction p)
 {
-    year = y, month = m, day = d;
-    return ;
+    Fraction tmp;
+    tmp.fz = this->fz * p.fm;
+    tmp.fm = this->fm * p.fz;
+    return tmp;
 }
-void Date::print()
+void Fraction::set(int x, int y)
 {
-    cout << "Today is " << setfill('0') << setw(2) << year
-         << '/' << setfill('0') << setw(2) << month << '/'
-         << setfill('0') << setw(2) << day << '\n'; 
-    addOneDay();
-    cout << "Tomorrow is " << setfill('0') << setw(2) << year 
-         << '/' << setfill('0') << setw(2) << month << '/'
-         << setfill('0') << setw(2) << day << '\n'; 
-    return ; 
+    fz = x, fm = y;
 }
-void Date::addOneDay()
+void Fraction::display()
 {
-    if(isR())
-    {
-        if(day + 1 <= rmd[month]) day += 1;
-        else if(month + 1 <= 12) month += 1, day = 1;
-        else year += 1, month = 1, day = 1;
-    }
-    else 
-    {
-        if(day + 1 <= md[month]) day += 1;
-        else if(month + 1 <= 12) month += 1, day = 1;
-        else year += 1, month = 1, day = 1;
-    }
-    return ;
-}
-bool Date::isR()
-{
-    if(year % 400 == 0)
-        return true;
-    else if(year % 100 == 0)
-        return false;
-    else if(year % 4 == 0)
-        return true;
-    else return false;
-}
-
-void solve(void)
-{
-    int t; cin >> t;
-    for(int i = 0; i < t; i++)
-    {
-        if(t % 2)
-        {
-            int tempy, tempm, tempd;
-            cin >> tempy >> tempm >> tempd;
-            Date d;
-            d.setDate(tempy, tempm, tempd);
-            d.print();
-        }
-        else
-        {
-            int tempy, tempm, tempd;
-            cin >> tempy >> tempm >> tempd;
-            Date d(tempy, tempm, tempd);
-            d.print();
-        }
-    }
+    cout << "fraction=" << fz << '/' << fm << endl;
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    int _ = 1;
-    // cin >> _;
-    while(_--) solve();
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    Fraction t1(a, b), t2(c, d);
+    (t1 + t2).display();
+    (t1 - t2).display();
+    (t1 * t2).display();
+    (t1 / t2).display();
     return 0;
 }

@@ -1,71 +1,43 @@
-#include <iostream>
-#include <iomanip>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
-
-class Point
+class Complex
 {
-    double x, y;
+private:
+    float real, image;
 public:
-    Point();
-    Point(double x_value, double y_value);
-    double getX();
-    double getY();
-    void setX(double x_value);
-    void setY(double y_value);
-    double distanceToAnotherPoint(Point P);
+    Complex(float x = 0, float y = 0);
+    friend Complex operator+(Complex&, Complex&);
+    friend Complex operator-(Complex&, Complex&);
+    friend Complex operator*(Complex&, Complex&);
+    void show();
 };
-Point::Point()
+Complex::Complex(float x, float y) : real(x), image(y) { }
+Complex operator+(Complex& p, Complex& q)
 {
-    x = 0, y = 0;
+    Complex tmp(p.real + q.real, p.image + q.image);
+    return tmp;
 }
-Point::Point(double x_value, double y_value)
+Complex operator-(Complex& p, Complex& q)
 {
-    x = x_value;
-    y = y_value;
+    Complex tmp(p.real - q.real, p.image - q.image);
+    return tmp;
 }
-void Point::setX(double x_value)
+Complex operator*(Complex& p, Complex& q)
 {
-    x = x_value;
-    return ;
+    Complex tmp(p.real * q.real - p.image * q.image, p.real * q.image + p.image * q.real);
+    return tmp;
 }
-void Point::setY(double y_value)
-
+void Complex::show()
 {
-    y = y_value;
-    return ;
-}
-double Point::getX(void)
-{
-    return x;
-}
-double Point::getY(void)
-{
-    return y;
-}
-double Point::distanceToAnotherPoint(Point P)
-{
-    return sqrt((x - P.getX()) * (x - P.getX()) + (y - P.getY()) * (y - P.getY()));
-}
-void solve(void)
-{
-    double tempX1, tempY1, tempX2, tempY2;
-    cin >> tempX1 >> tempY1 >> tempX2 >> tempY2;
-    Point p1(tempX1, tempY1), p2(tempX2, tempY2);
-    cout << "Distance of Point("
-         << fixed << setprecision(2) << p1.getX() <<","
-         << fixed << setprecision(2) << p1.getY() << ") to Point("
-         << fixed << setprecision(2) << p2.getX() << ","
-         << fixed << setprecision(2) << p2.getY() << ") is "
-         << fixed << setprecision(2) << p1.distanceToAnotherPoint(p2) << '\n';
+    cout << "Real=" << real <<" Image=" << image << '\n';
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    int _ = 1;
-    cin >> _;
-    while(_--)
-        solve();
+    double a, b, c, d;
+    cin >> a >> b >> c >> d;
+    Complex c1(a, b), c2(c, d);
+    (c1 + c2).show();
+    (c1 - c2).show();
+    (c1 * c2).show();
+    return 0;
 }
