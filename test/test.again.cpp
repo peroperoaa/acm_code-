@@ -1,99 +1,100 @@
-#include<iostream>
-#include<cstring>
-#include<string>
-#include<cmath>
-#include<algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
-class CFraction{
-
+class MyMatrix
+{
+    friend MyMatrix operator * (const MyMatrix& p, const MyMatrix& q);
+    int** data;
 public:
-    CFraction() {};
-    CFraction(int fz_val, int fm_val);
-    CFraction add(const CFraction &r);
-    CFraction sub(const CFraction &r);
-    CFraction mul(const CFraction &r);
-    CFraction div(const CFraction &r);
-    int getGCD();   
-    void print();
-
-private:
-    int fz, fm;
-};
-
-CFraction::CFraction(int fz_val, int fm_val): fz (fz_val), fm (fm_val) {}
-
-CFraction CFraction::add(const CFraction &r) { 
-    return CFraction(fz * r.fm + r.fz * fm, fm * r.fm);
-};
-
-CFraction CFraction::sub(const CFraction &r) { 
-    return CFraction(fz * r.fm - r.fz * fm, fm * r.fm);
-};
-
-CFraction CFraction::mul(const CFraction &r) { 
-    return CFraction(fz * r.fz, fm * r.fm);
-};
-
-CFraction CFraction::div(const CFraction &r) { 
-    return CFraction(fz * r.fm, fm * r.fz);
-};
-
-int CFraction::getGCD(){
-    int a = abs(fz), b = abs(fm);
-    int temp;
-    if(a < b) {
-        temp = a;
-        a = b;
-        b = temp;
+    int n;
+    MyMatrix& operator =(const MyMatrix& p)
+    {
+        n = p.n;
+        // cout << "构造函数调用n = " << n << endl;
+        data = new int* [n];
+        for(int i = 0; i < n; i++)
+            data[i] = new int [n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                data[i][j] = p.data[i][j];  
+        return *this;
     }
-    int r = a % b;
-    while(a % b) {
-        r = a % b; 
-        a = b;
-        b = r;
+    // MyMatrix(const MyMatrix& p)
+    // {
+    //     n = p.n;
+    //     cout << "构造函数调用n = " << n << endl;
+    //     data = new int* [n];
+    //     for(int i = 0; i < n; i++)
+    //         data[i] = new int [n];
+    //     for(int i = 0; i < n; i++)
+    //         for(int j = 0; j < n; j++)
+    //             data[i][j] = p.data[i][j];
+    // }
+    MyMatrix()
+    {
+        data = NULL;
+        n = 0;
     }
-    return b;
+    void print()
+    {
+        for(int i = 0; i < n; i++)
+        {
+            // cout << "print's n = " << n << endl;
+            cout << data[i][0];
+            for(int j = 1; j < n; j++)
+                cout << ' ' << data[i][j];
+            if(i + 1 != n)
+                cout << endl;
+        }
+    }
+    ~MyMatrix()
+    {
+        for(int i = 0; i < n; i++)
+            delete data[i];
+        delete data;
+        data = NULL;
+    }
+    void set(int n)
+    {
+        this->n = n;
+        data = new int* [n];
+        for(int i = 0; i < n; i++)
+            data[i] = new int [n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                data[i][j] = 0;
+    }
+    void input()
+    {
+        // cout << "input's n = " << n << endl;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                    cin >> data[i][j];
+    }
 };
-
-void CFraction::print() {
-    int GCD = getGCD();
-    fz /= GCD;
-    fm /= GCD;
-    if (fz / fz == fm / fm) {
-        cout << fz << "/" << fm << endl;
-    }
-    else {
-        cout << "-" << fz << "/" << fm << endl;
-    }
+MyMatrix operator * (const MyMatrix& p, const MyMatrix& q)
+{
+    int n = p.n;
+    MyMatrix tmp;
+    tmp.set(n);
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            for(int k = 0; k < n; k++)
+                tmp.data[i][j] += p.data[i][k] * q.data[k][j];
+    return tmp;
 }
 
-void solve() {
-    int a1 = 0, b1 = 0, a2 = 0, b2 = 0;
-    char c;
-    cin >> a1 >> c >> b1 >> a2 >> c >> b2;
-    CFraction p1(a1, b1);
-    CFraction p2(a2, b2);
-    CFraction p3;
-    p3 = p1.add(p2);
-    p3.print();
-    p3 = p1.sub(p2);
-    p3.print();
-    p3 = p1.mul(p2);
-    p3.print();
-    p3 = p1.div(p2);
-    p3.print();
-    cout << endl;
-    return;
-}
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(0), cout.tie(0);
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
+int main()
+{
+    int c, n; cin >> c >> n;
+    MyMatrix m, tmp;
+    tmp.set(n), m.set(n);
+    tmp.input();
+    for(int i = 0; i < c - 1; i++)
+    {
+        m.input();
+        // cout << "here\n";
+        tmp = tmp * m;
     }
+    tmp.print();
     return 0;
 }

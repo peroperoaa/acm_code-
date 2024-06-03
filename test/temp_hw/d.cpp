@@ -1,96 +1,85 @@
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-#include <new>
+#include <bits/stdc++.h>
 using namespace std;
-
-class Point
+class MyMatrix
 {
-    double x, y;
+    friend MyMatrix operator * (const MyMatrix& p, const MyMatrix& q);
+    int** data;
 public:
-    Point();
-    Point(double x_value, double y_value);
-    ~Point();
-    double getX();
-    double getY();
-    void setX(double x_value);
-    void setY(double y_value);
-    double getDisTo(const Point &P);
-};
-Point::Point()
-{
-    x = 0, y = 0;
-    cout << "Constructor.\n";
-}
-Point::~Point()
-{
-    cout << "Distructor.\n";
-}
-Point::Point(double x_value, double y_value)
-{
-    x = x_value;
-    y = y_value;
-}
-void Point::setX(double x_value)
-{
-    x = x_value;
-    return ;
-}
-void Point::setY(double y_value)
-
-{
-    y = y_value;
-    return ;
-}
-double Point::getX(void)
-{
-    return x;
-}
-double Point::getY(void)
-{
-    return y;
-}
-double Point::getDisTo(const Point &P)
-{
-    return sqrt((x - P.x) * (x - P.x) + (y - P.y) * (y - P.y));
-}
-void solve(void)
-{
-    int n; cin >> n;
-    Point* p = new Point [n];
-    for(int i = 0; i < n; i++)
+    int n;
+    MyMatrix& operator =(const MyMatrix& p)
     {
-        double tempx, tempy; cin >> tempx >> tempy;
-        p[i].setX(tempx), p[i].setY(tempy);
+        n = p.n;
+        data = new int* [n];
+        for(int i = 0; i < n; i++)
+            data[i] = new int [n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                data[i][j] = p.data[i][j];  
+        return *this;
     }
-    int pos1 = -1, pos2 = -1;
-    double ans = -1e30;
+    MyMatrix()
+    {
+        data = NULL;
+        n = 0;
+    }
+    void print()
+    {
+        for(int i = 0; i < n; i++)
+        {
+            cout << data[i][0];
+            for(int j = 1; j < n; j++)
+                cout << ' ' << data[i][j];
+            if(i + 1 != n)
+                cout << endl;
+        }
+    }
+    ~MyMatrix()
+    {
+        for(int i = 0; i < n; i++)
+            delete data[i];
+        delete data;
+        data = NULL;
+    }
+    void set(int n)
+    {
+        this->n = n;
+        data = new int* [n];
+        for(int i = 0; i < n; i++)
+            data[i] = new int [n];
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                data[i][j] = 0;
+    }
+    void input()
+    {
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                    cin >> data[i][j];
+    }
+};
+MyMatrix operator * (const MyMatrix& p, const MyMatrix& q)
+{
+    int n = p.n;
+    MyMatrix tmp;
+    tmp.set(n);
     for(int i = 0; i < n; i++)
         for(int j = 0; j < n; j++)
-            if(i == j)
-                continue;
-            else 
-                if(p[i].getDisTo(p[j]) > ans)
-                {
-                    ans = p[i].getDisTo(p[j]);
-                    pos1 = min(i, j), pos2 = max(i, j);
-                }
-                else if(p[i].getDisTo(p[j]) == ans)
-                    if(min(i, j) < pos1)
-                        pos1 = min(i, j), pos2 = max(i, j);
-    cout << "The longeset distance is "
-         << fixed << setprecision(2) 
-         << ans << ",between p[" << pos1
-         << "] and p[" << pos2 << "]." << '\n';
-    delete [] p;
+            for(int k = 0; k < n; k++)
+                tmp.data[i][j] += p.data[i][k] * q.data[k][j];
+    return tmp;
 }
+
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    int _ = 1;
-    cin >> _;
-    while(_--)
-        solve();
+    int c, n; cin >> c >> n;
+    MyMatrix m, tmp;
+    tmp.set(n), m.set(n);
+    tmp.input();
+    for(int i = 0; i < c - 1; i++)
+    {
+        m.input();
+        tmp = tmp * m;
+    }
+    tmp.print();
+    return 0;
 }
