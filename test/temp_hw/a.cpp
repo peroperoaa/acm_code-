@@ -1,71 +1,128 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <cstring>
+
 using namespace std;
 
-class Point
-{
-    double x, y;
+class MyMatrix {
+private:
+	int n;
+	int** data;
 public:
-    Point();
-    Point(double x_value, double y_value);
-    double getX();
-    double getY();
-    void setX(double x_value);
-    void setY(double y_value);
-    double distanceToAnotherPoint(Point P);
+	MyMatrix(int n1, int** d = NULL);
+	~MyMatrix();
+	MyMatrix operator * (MyMatrix& m);
+	MyMatrix& operator = (const MyMatrix& m);
+	void print();
 };
-Point::Point()
-{
-    x = 0, y = 0;
-}
-Point::Point(double x_value, double y_value)
-{
-    x = x_value;
-    y = y_value;
-}
-void Point::setX(double x_value)
-{
-    x = x_value;
-    return ;
-}
-void Point::setY(double y_value)
 
-{
-    y = y_value;
-    return ;
+MyMatrix::MyMatrix(int n1, int** d) : n(n1) {
+	data = new int* [n];
+
+	for (int i = 0; i < n; i++) {
+		data[i] = new int[n];
+	}
+	if(d != NULL)
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				data[i][j] = d[i][j];
+			}
+		}
 }
-double Point::getX(void)
-{
-    return x;
+
+
+MyMatrix MyMatrix::operator * (MyMatrix& m) {
+	
+	MyMatrix pm(n);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+                pm.data[i][j] = 0;
+			for (int k = 0; k < n; k++) {
+				pm.data[i][j] += m.data[k][j] * data[i][k];
+			}
+		}
+	}
+	return pm;
 }
-double Point::getY(void)
-{
-    return y;
+
+MyMatrix& MyMatrix::operator = (const MyMatrix& m) {
+	n = m.n;
+	data = new int*[n];
+	for (int i = 0; i < n; i++) {
+		data[i] = new int[n];
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			data[i][j] = m.data[i][j];
+		}
+	}
+	return *this;
 }
-double Point::distanceToAnotherPoint(Point P)
-{
-    return sqrt((x - P.getX()) * (x - P.getX()) + (y - P.getY()) * (y - P.getY()));
+
+void MyMatrix::print() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (j == n - 1) {
+				cout << data[i][j];
+				break;
+			}
+			cout << data[i][j] << ' ';
+		}
+		cout << endl;
+	}
 }
-void solve(void)
-{
-    double tempX1, tempY1, tempX2, tempY2;
-    cin >> tempX1 >> tempY1 >> tempX2 >> tempY2;
-    Point p1(tempX1, tempY1), p2(tempX2, tempY2);
-    cout << "Distance of Point("
-         << fixed << setprecision(2) << p1.getX() <<","
-         << fixed << setprecision(2) << p1.getY() << ") to Point("
-         << fixed << setprecision(2) << p2.getX() << ","
-         << fixed << setprecision(2) << p2.getY() << ") is "
-         << fixed << setprecision(2) << p1.distanceToAnotherPoint(p2) << '\n';
+
+MyMatrix::~MyMatrix() {
+
+	for (int i = 0; i < n; i++) {
+		delete[] data[i];
+	}
+	delete[] data;
 }
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    int _ = 1;
-    cin >> _;
-    while(_--)
-        solve();
+
+int main() {
+	int t;
+
+	cin >> t;
+
+	int n;
+
+	cin >> n;
+
+	int** a = new int* [n];
+
+	for (int i = 0; i < n; i++) {
+		a[i] = new int[n];
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> a[i][j];
+		}
+	}
+
+	MyMatrix m1(n, a);
+
+	t--;
+
+	while (t--) {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				cin >> a[i][j];
+			}
+		}
+		MyMatrix pm(n, a);
+        m1 = m1 * pm;
+	}
+	m1.print();
+
+	for (int i = 0; i < n; i++) {
+		delete[] a[i];
+	}
+	delete[] a;
+
+	return 0;
 }
